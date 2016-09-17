@@ -50,10 +50,41 @@ describe('Thermostat', function(){
     expect(thermostat.isPowerSavingModeOn()).toBe(true);
   });
 
+  // You can reset the temperature to 20 by hitting the reset button
+  it('can be reset to the default temperature', function() {
+    for(var i = 0; i < 6; i++) {
+      thermostat.increaseTemp();
+    }
+    thermostat.resetTemp();
+    expect(thermostat.getCurrentTemperature()).toEqual(20);
+  });
+
+  describe('when power saving mode is on', function(){
+
+    // If power saving mode is on, the maximum temperature is 25 degrees
+    it('has a maximum temperature of 25 degrees', function(){
+      for(var i = 0; i < 6; i++) {
+        thermostat.increaseTemp();
+      }
+      expect(thermostat.getCurrentTemperature()).toEqual(25);
+    });
+
+  });
+
+  describe('when power saving mode is off', function(){
+
+    // If power saving mode is off, the maximum temperature is 32 degrees
+    it('has a maximum temperature of 32 degrees', function(){
+      thermostat.switchOffPowerSavingMode();
+      for(var i = 0; i < 13; i++) {
+        thermostat.increaseTemp();
+      }
+      expect(thermostat.getCurrentTemperature()).toEqual(32);
+    });
+
+  });
+
 
 });
 
-// If power saving mode is on, the maximum temperature is 25 degrees
-// If power saving mode is off, the maximum temperature is 32 degrees
-// You can reset the temperature to 20 by hitting the reset button
 // The thermostat should color the display based on energy usage - < 18 is green, < 25 is yellow, otherwise red

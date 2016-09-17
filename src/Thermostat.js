@@ -11,11 +11,11 @@ function Thermostat(){
 };
 
 Thermostat.prototype.getCurrentTemperature = function () {
-return this.temperature;
+  return this.temperature;
 };
 
 Thermostat.prototype.increaseTemp = function () {
-if(this.isMaximumTemperature()) {
+  if(this.isMaximumTemperature()) {
   return
 }
   this.temperature += 1;
